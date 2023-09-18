@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: rgb(21 69 201 / 83%);
+            background-image: url('images/background.jpeg');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: rgba(51, 93, 209, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .icon {
+            max-width: 100%;
+            height: auto; 
+            margin: 0 auto 10px;
+            display: block;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 111%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            text-indent: 35px;
+            background-image: url("images/bxs-user.svg");
+            background-repeat: no-repeat;
+            background-size: 22px;
+            background-color: rgb(255, 255, 255);
+            background-position: 9px center;
+        }
+
+        .submit {
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            width: 122%;
+            transition: background-color 0.3s;
+        }
+
+        .submit:hover {
+            background-color: #1c6eb0;
+        }
+
+        .input-container {
+            background-color: rgba(51, 93, 209, 0.1);
+        }
+
+        .forgot {
+            width: 122%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 16px;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+            color: #333;
+            cursor: pointer;
+        }
+
+        #form-message {
+            color: red;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function checkPassword(inputPassword) {
+            var passw = /(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&!])/;
+            if (passw.test(inputPassword)) {
+                return true;
+            }
+            return false;
+        }
+
+        function checkEmailAndPassword(email, password) {
+            if (email === "test@luxpmsoft.com" && password === "test1234!") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function isValidFormData() {
+            var email = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if (checkPassword(password)) {
+                return checkEmailAndPassword(email, password);
+            }
+            return false;
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            if (isValidFormData()) {
+                // Redirect to the new page if credentials are correct
+                window.location.href = "new-page.html"; //use the right url
+            } else {
+                var div = document.getElementById("form-message");
+                div.innerHTML = "<p>Wrong Combination</p>";
+            }
+        }
+    </script>
+    <div class="login-container">
+        <img src="images/bx-cart.svg" alt="Icon" class="icon" />
+        <h2>Login</h2>
+        <form id="login-form" method="post" onsubmit="return submitForm(event)">
+            <div class="input-container">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-container">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div id="form-message"></div>
+            <button type="submit" class="submit">Login</button>
+            <div class="forgot">
+                <span>Forgot password?</span>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
